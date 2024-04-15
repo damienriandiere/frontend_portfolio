@@ -1,4 +1,8 @@
 :root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -6,11 +10,85 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
+  max-width: 1280;
+  margin: 0 auto;
+  padding: 0rem;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #242424; /* Couleur de fond de la navbar */
+  z-index: 1000; /* Assurez-vous que la navbar est au-dessus du contenu */
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.nav-item {
+margin: 0 10px;
+font-size: 18px;
+padding: 10px 20px;
+color: #fff;
+text-decoration: none;
+border-radius: 5px;
+}
+
+
+.footer-item {
+margin: 0 2px;
+font-size: 18px;
+padding: 0px 2px;
+color: #fff;
+text-decoration: none;
+border-radius: 0px;
+}
+
+.div-with-margins {
+  margin-top: 50px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  margin-left: 50px;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
 }
 
 a {
