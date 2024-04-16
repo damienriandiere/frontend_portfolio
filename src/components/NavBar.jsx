@@ -1,12 +1,20 @@
+import { useState } from 'react';
 import useAuth from './useAuth';
 import { FiArrowLeft } from 'react-icons/fi';
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
 
 function Navbar() {
   const isLoggedIn = useAuth();
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    window.location.reload();
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+      window.location.reload();
+    }, 2000);
   };
 
   const handleGoBack = () => {
@@ -30,6 +38,11 @@ function Navbar() {
               <a href="/register" className="nav-item">S&apos;inscrire</a>
             </>
           )}
+          {showAlert && ( 
+            <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+              Vous avez été déconnecté avec succès.
+            </Alert>
+        )}
       </div>
     </div>
   );

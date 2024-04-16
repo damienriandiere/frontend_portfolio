@@ -1,19 +1,40 @@
+import { Container, Grid, Paper, Typography } from '@mui/material';
+
 function HomePage() {
   return (
-    <div>
-        <h1>Bienvenue sur mon Portfolio</h1>
-        <p>Je suis Damien Riandiere, un développeur passionné par l&apos;intelligence artificielle et la création de solutions innovantes.</p>
-
-      {/* Section Compétences */}
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Compétences</h2>
-        <ul className="list-disc list-inside">
-          <li>Front-end : HTML, CSS, JavaScript, React.js</li>
-          <li>Back-end : Node.js, Express.js, MongoDB</li>
-          <li>Outils : Git, Webpack, Babel</li>
-        </ul>
-      </section>
-    </div>
+    <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h3" align="center" gutterBottom>
+            Bienvenue sur mon portfolio
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper style={{ padding: '20px' }}>
+            <Typography variant="h5" gutterBottom>
+              À propos de moi
+            </Typography>
+            <Typography variant="body1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere magna sit amet ex volutpat
+              dignissim. Sed ac ex ac orci ultricies dignissim. Pellentesque habitant morbi tristique senectus et
+              netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et
+              ultrices posuere cubilia curae; Donec eget enim non arcu laoreet finibus.
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper style={{ padding: '20px' }}>
+            <Typography variant="h5" gutterBottom>
+              Mes projets
+            </Typography>
+            <Typography variant="body1">
+              Voici quelques-uns des projets sur lesquels j&apos;ai travaillé récemment.
+            </Typography>
+            {/* Ajoutez ici une liste de vos projets */}
+          </Paper>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 

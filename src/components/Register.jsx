@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
+import { TextField, Button, Box, Typography, Container } from '@mui/material';
 
 function Register() {
     const navigate = useNavigate();
@@ -50,52 +51,58 @@ function Register() {
   };
 
   return (
-    <div>
-      <h2>Inscription</h2>
-      <form onSubmit={handleSubmit}>
-      <div className="div-with-margins">
-          <label htmlFor="name">Nom : </label>
-          <input
-            type="name"
-            id="name"
-            value={name}
-            onChange={handleNameChange}
-            required
-          />
-        </div>
-        <div className="div-with-margins">
-          <label htmlFor="email">E-mail : </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-        </div>
-        <div className="div-with-margins">
-          <label htmlFor="password">Mot de passe : </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-        </div>
-        <div className="div-with-margins">
-          <label htmlFor="role">Code : </label>
-          <input
-            type="role"
-            id="role"
-            value={role}
-            onChange={handleRoleChange}
-            required
-          />
-        </div>
-        <button type="submit" href="/">S&apos;enregistrer</button>
-      </form>
-    </div>
+    <Container maxWidth="sm">
+      <Typography variant="h4" align="center" gutterBottom>
+        Inscription
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit}>
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Nom*"
+          name="name"
+          value={name}
+          onChange={handleNameChange}
+          InputProps={{ style: { color: 'white' } }}
+          InputLabelProps={{ style: { color: 'white' } }}
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Adresse E-mail*"
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleEmailChange}
+          InputProps={{ style: { color: 'white' } }}
+          InputLabelProps={{ style: { color: 'white' } }}
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Mot de passe*"
+          type="password"
+          name="password"
+          value={password}
+          onChange={handlePasswordChange}
+          InputProps={{ style: { color: 'white' } }}
+          InputLabelProps={{ style: { color: 'white' } }}
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Code*"
+          name="code"
+          value={role}
+          onChange={handleRoleChange}
+          InputProps={{ style: { color: 'white' } }}
+          InputLabelProps={{ style: { color: 'white' } }}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          S&apos;inscrire
+        </Button>
+      </Box>
+    </Container>
   );
 }
 

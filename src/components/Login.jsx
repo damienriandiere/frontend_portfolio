@@ -1,5 +1,6 @@
 import  { useState } from 'react';
 import axios from 'axios'; 
+import { TextField, Button, Box, Typography, Container } from '@mui/material';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -30,32 +31,38 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Connexion</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="div-with-margins">
-          <label htmlFor="email">E-mail : </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-        </div>
-        <div className="div-with-margins">
-          <label htmlFor="password">Mot de passe : </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-        </div>
-        <button type="submit" href="/">Se connecter</button>
-      </form>
-    </div>
+    <Container maxWidth="sm">
+      <Typography variant="h4" align="center" gutterBottom>
+        Connectez-vous
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit}>
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Adresse E-mail *"
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleEmailChange}
+          InputProps={{ style: { color: 'white' } }}
+          InputLabelProps={{ style: { color: 'white' } }}
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Mot de passe *"
+          type="password"
+          name="password"
+          value={password}
+          onChange={handlePasswordChange}
+          InputProps={{ style: { color: 'white' } }}
+          InputLabelProps={{ style: { color: 'white' } }}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Se connecter
+        </Button>
+      </Box>
+    </Container>
   );
 }
 

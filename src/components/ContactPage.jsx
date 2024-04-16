@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { TextField, Button, Box, Typography, Container } from '@mui/material';
 
 function ContactPage() {
   const [formData, setFormData] = useState({
-    email: '',
+    name: '',
     message: ''
   });
 
@@ -14,22 +15,67 @@ function ContactPage() {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, message } = formData;
+    const mailtoLink = `mailto:damien.riandiere.etu@univ-lemans.fr?subject=${encodeURIComponent('Message de ' + name)}&body=${encodeURIComponent(message + '\n\n')}`;
+    window.location.href = mailtoLink;
+  };
+
   return (
-    <div>
-    <h2>Contact</h2>
-    <p>Vous pouvez me contacter en remplissant le formulaire ci-dessous :</p>
-    <form action="mailto:damien.riandiere.etu@univ-lemans.fr" method="post">
-        <div>
-            <label htmlFor="subject">Sujet :</label>
-            <input type="text" id="subject" name="subject" required></input>
-        </div>
-        <div className="div-with-margins">
-            <label htmlFor="message">Message : </label>
-            <textarea id="message" name="message" value={formData.message} onChange={handleChange} required />
-        </div>
-        <button type="submit">Envoyer</button>
-    </form>
-    </div>
+    <Container maxWidth="md" style={{ marginTop: '50px' }}>
+      <Typography variant="h4" align="center" gutterBottom paragraph>
+        Présentation personelle
+      </Typography>
+      <Typography variant="body1" align="justify" gutterBottom paragraph> 
+        Je m&apos;appelle Damien Riandiere et je suis alternant à l&apos;école Nationale Supérieure des Ingénieurs du Mans (ENSIM).<br></br><br></br>
+        Mon entreprise est Thales à Massy. Je suis actuellement en 4ème année de cycle ingénieur, en spécialité Informatique.
+        Je suis passionné par l&apos;informatique depuis des années !<br></br><br></br>
+
+        En effet, quand j&apos;étais adolescent, j&apos;ai commencé à m&apos;intéresser à l&apos;informatique en codant des serveurs sur le jeu Arma3.<br></br>
+        Plus tard, au lycée, j&apos;ai choisi des options en informatique pour apprendre les bases de la programmation.
+        Pour le baccalauréat, j&apos;ai réalisé un projet de Tower Defense en Python en utilisant la bibliothèque Pygame.<br></br><br></br>
+
+        Depuis mon entrée à l&apos;ENSIM, j&apos;ai commencé un projet personnel que j&apos;ai nommé L&apos;Algo de Kerpo.
+        <br></br>Il s&apos;agit d&apos;un algorithme qui pronostique les résultats de matchs de tennis, en se basant sur les statistiques des joueurs.
+        Pour cela, j&apos;ai implémenté du scraping pour aller récupérer les données des matchs/joueurs, les côtes sur les sites de paris
+        sportifs.<br></br> Puis j&apos;ai utilisé des algorithmes de machine learning pour prédire les résultats.<br></br>
+        Enfin, j&apos;ai créé un bot Telegram afin de poster les prédictions dans un canal.
+      </Typography>
+      <Typography variant="h4" align="center" gutterBottom>
+        Formulaire de Contact
+      </Typography>
+      <Typography variant="p" align="center" gutterBottom>
+        Vous pouvez m&apos;envoyer un message en utilisant le formulaire ci-dessous :
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit}>
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Nom*"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          InputProps={{ style: { color: 'white' } }}
+          InputLabelProps={{ style: { color: 'white' } }}
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          label="Message*"
+          multiline
+          rows={4}
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          InputProps={{ style: { color: 'white' } }}
+          InputLabelProps={{ style: { color: 'white' } }}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Envoyer
+        </Button>
+      </Box>
+    </Container>
   );
 }
 
