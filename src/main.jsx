@@ -10,6 +10,7 @@ import ProjectPage from './components/ProjectPage.jsx';
 import ContactPage from './components/ContactPage.jsx';
 import Navbar from './components/NavBar.jsx';
 import Footer from './components/Footer.jsx';
+import RedirectAfterLogin from './components/RedirectAfterLogin.jsx';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
   {
     path: "/projects",
     element: <ProjectPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/successful_logged",
+    element: <RedirectAfterLogin />,
     errorElement: <ErrorPage />,
   },
 ]);

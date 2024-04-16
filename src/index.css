@@ -32,6 +32,16 @@
   z-index: 1000; /* Assurez-vous que la navbar est au-dessus du contenu */
 }
 
+
+.nav-item {
+  margin: 0 10px;
+  font-size: 18px;
+  padding: 10px 20px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -43,14 +53,7 @@
   z-index: 1000;
 }
 
-.nav-item {
-margin: 0 10px;
-font-size: 18px;
-padding: 10px 20px;
-color: #fff;
-text-decoration: none;
-border-radius: 5px;
-}
+
 
 
 .footer-item {
