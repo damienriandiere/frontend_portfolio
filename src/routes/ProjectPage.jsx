@@ -39,7 +39,7 @@ export default function MediaCard() {
   const renderProjects = searchTerm === '' ? projects : filteredProjects;
 
   return (
-    <Container style={{ marginTop: '50px' }}>
+    <Container style={{ marginTop: '70px' }}>
       <Typography gutterBottom variant="h4" component="div">
         Liste des projets réalisés
       </Typography>

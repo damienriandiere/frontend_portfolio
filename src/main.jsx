@@ -2,16 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./components/error-page.jsx";
-import HomePage from './components/HomePage.jsx';
-import Login from './components/Login.jsx';
-import Register from './components/Register.jsx';
-import ProjectPage from './components/ProjectPage.jsx';
-import ContactPage from './components/ContactPage.jsx';
+import ErrorPage from "./error-page.jsx";
+import HomePage from './routes/HomePage.jsx';
+import LoginPage from './routes/LoginPage.jsx';
+import RegisterPage from './routes/RegisterPage.jsx';
+import ProjectPage from './routes/ProjectPage.jsx';
+import ContactPage from './routes/ContactPage.jsx';
 import Navbar from './components/NavBar.jsx';
 import Footer from './components/Footer.jsx';
-import RedirectAfterLogin from './components/RedirectAfterLogin.jsx';
-import ProjectDetailsPage from './components/ProjectDetailsPage.jsx';
+import RedirectAfterLoginPage from './routes/RedirectAfterLoginPage.jsx';
+import RedirectAfterRegisterPage from './routes/RedirectAfterRegisterPage.jsx';
+import ProjectDetailsPage from './routes/ProjectDetailsPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,12 +22,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/register",
-    element: <Register />,
+    element: <RegisterPage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -41,7 +42,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/successful_logged",
-    element: <RedirectAfterLogin />,
+    element: <RedirectAfterLoginPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/successful_registered",
+    element: <RedirectAfterRegisterPage />,
     errorElement: <ErrorPage />,
   },
   {

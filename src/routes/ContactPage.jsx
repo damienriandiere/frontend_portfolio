@@ -23,7 +23,7 @@ function ContactPage() {
   };
 
   return (
-    <Container maxWidth="md" style={{ marginTop: '50px' }}>
+    <Container maxWidth="md" style={{ marginTop: '70px' }}>
       <Typography variant="h4" align="center" gutterBottom paragraph>
         Présentation personelle
       </Typography>

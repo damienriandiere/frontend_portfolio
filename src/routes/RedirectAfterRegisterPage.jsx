@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaCheckCircle } from 'react-icons/fa';
 
-const RegistrationSuccessful = () => {
+const RedirectAfterRegisterPage = () => {
   const navigate = useNavigate();
     useEffect(() => {
         const timerId = setTimeout(() => {
@@ -21,10 +21,10 @@ const RegistrationSuccessful = () => {
         Inscription réussie, vous êtes connecté(e) !
       </div>
       <div className="div-with-margins">
-        Vous allez être redirigé(e) vers la page d&apos;accueil.
+        Vous allez être redirigé(e) vers la page d&apos;accueil...
       </div>
     </div>
   );
 };
 
-export default RegistrationSuccessful;
+export default RedirectAfterRegisterPage;

@@ -1,10 +1,8 @@
 import  { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
 
-function Register() {
-    const navigate = useNavigate();
+function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -44,7 +42,7 @@ function Register() {
         });
         const token = response.data.token;
         localStorage.setItem('token', token);
-        navigate('/');
+        window.location.href = '/successful_registered';
     } catch (error) {
         console.error('Erreur lors de la connexion:', error);
     }
@@ -106,4 +104,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterPage;

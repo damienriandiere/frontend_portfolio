@@ -2,7 +2,7 @@ import  { useState } from 'react';
 import axios from 'axios'; 
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
 
-function Login() {
+function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -66,4 +66,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

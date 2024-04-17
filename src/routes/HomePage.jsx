@@ -2,7 +2,7 @@ import { Container, Grid, Paper, Typography } from '@mui/material';
 
 function HomePage() {
   return (
-    <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+    <Container maxWidth="lg" style={{ marginTop: '70px' }}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h3" align="center" gutterBottom>
@@ -30,7 +30,6 @@ function HomePage() {
             <Typography variant="body1">
               Voici quelques-uns des projets sur lesquels j&apos;ai travaillé récemment.
             </Typography>
-            {/* Ajoutez ici une liste de vos projets */}
           </Paper>
         </Grid>
       </Grid>
