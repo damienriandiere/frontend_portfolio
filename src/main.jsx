@@ -11,6 +11,7 @@ import ContactPage from './components/ContactPage.jsx';
 import Navbar from './components/NavBar.jsx';
 import Footer from './components/Footer.jsx';
 import RedirectAfterLogin from './components/RedirectAfterLogin.jsx';
+import ProjectDetailsPage from './components/ProjectDetailsPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
     element: <RedirectAfterLogin />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/project/:projectId",
+    element: <ProjectDetailsPage />,
+    errorElement: <ErrorPage />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

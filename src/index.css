@@ -68,6 +68,13 @@ border-radius: 0px;
   margin-left: 50px;
 }
 
+.description-projects {
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
