@@ -1,12 +1,19 @@
-import { useState } from 'react';
-import useAuth from './useAuth';
+import { AppBar, Toolbar, Alert, Button, IconButton, Menu, MenuItem } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { FiArrowLeft } from 'react-icons/fi';
-import Alert from '@mui/material/Alert';
+import { useState } from 'react';
 import CheckIcon from '@mui/icons-material/Check';
+import useAuth from './useAuth';
 
-function Navbar() {
+
+export default function Navbar() {
   const isLoggedIn = useAuth();
+  const [menuAnchor, setMenuAnchor] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+
+  const handleMenuOpen = (event) => {
+    setMenuAnchor(event.currentTarget);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -17,25 +24,61 @@ function Navbar() {
     }, 2000);
   };
 
+  const handleMenuClose = () => {
+    setMenuAnchor(null);
+  };
+
+  const handleMenuItemClick = (pageURL) => {
+    window.location.href = pageURL;
+    handleMenuClose();
+  };
+
   const handleGoBack = () => {
     window.history.back();
   };
 
   return (
-    <div className="navbar navbar-fixed-top">
-      <div>
-        <button onClick={handleGoBack} style={{ backgroundColor: '#242424' }}>
-          <FiArrowLeft />
-        </button>
-          <a href="/" className="nav-item">Accueil</a>
-          <a href="/projects" className="nav-item">Projets</a>
-          <a href="/contact" className="nav-item">À Propos</a>
+    <AppBar position="fixed" sx={{ bgcolor: '#242424' }}>
+      <Toolbar>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+          onClick={handleMenuOpen}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          anchorEl={menuAnchor}
+          open={Boolean(menuAnchor)}
+          onClose={handleMenuClose}
+        >
+          <MenuItem onClick={() => handleMenuItemClick('/')}>Accueil</MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick('/contact')}>A propos</MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick('/projects')}>Projects</MenuItem>
           {isLoggedIn ? (
-            <a onClick={handleLogout} className="nav-item">Se déconnecter</a>
+          <Button onClick={() => handleMenuItemClick('/dashboard')}>Dashboard</Button>
+          ) : (<></>
+          )}
+        </Menu>
+        <IconButton
+          size="large"
+          color="inherit"
+          aria-label="back"
+          onClick={handleGoBack}
+          sx={{ mr: 2 }}
+        >
+          <FiArrowLeft />
+        </IconButton>
+        <Button href="/" color="inherit" sx={{ flexGrow: 1 }}>Portfolio de Damien Riandiere</Button>
+        {isLoggedIn ? (
+          <Button onClick={handleLogout} color="inherit">Se déconnecter</Button>
           ) : (
             <>
-              <a href="/login" className="nav-item">Se connecter</a>
-              <a href="/register" className="nav-item">S&apos;inscrire</a>
+              <Button href="/login" color="inherit">Se connecter</Button>
+              <Button href="/register" color="inherit">S&apos;inscrire</Button>
             </>
           )}
           {showAlert && ( 
@@ -43,9 +86,7 @@ function Navbar() {
               Vous avez été déconnecté avec succès.
             </Alert>
         )}
-      </div>
-    </div>
+      </Toolbar>
+    </AppBar>
   );
 }
-
-export default Navbar;
