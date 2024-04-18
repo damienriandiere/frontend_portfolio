@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
+import Modal from '@mui/material/Modal';
 
 function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     message: ''
   });
+  const [error, setError] = useState("");
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,10 +18,24 @@ function ContactPage() {
     });
   };
 
+  const handleCloseErrorModal = () => {
+    setErrorModalOpen(false); // Ferme le modal d'erreur
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     const { name, message } = formData;
-    const mailtoLink = `mailto:damien.riandiere.etu@univ-lemans.fr?subject=${encodeURIComponent('Message de ' + name)}&body=${encodeURIComponent(message + '\n\n')}`;
+  
+    if (!name || !message) {
+      setError("Veuillez remplir tous les champs");
+      setErrorModalOpen(true);
+      return;
+    }
+  
+    // Si tous les champs sont remplis, continuez le traitement du formulaire
+    const mailto = import.meta.env.VITE_MAILTO;
+    const mailtoLink = `mailto:${mailto}?subject=${encodeURIComponent('Message de ' + name)}&body=${encodeURIComponent(message + '\n\n')}`;
     window.location.href = mailtoLink;
   };
 
@@ -75,6 +92,44 @@ function ContactPage() {
           Envoyer
         </Button>
       </Box>
+      <Modal
+        open={errorModalOpen}
+        onClose={handleCloseErrorModal}
+        aria-labelledby="error-modal-title"
+        aria-describedby="error-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography variant="h6" id="error-modal-title" sx={{ color: "black" }} gutterBottom>
+            Erreur
+          </Typography>
+          <Typography
+            variant="body1"
+            id="error-modal-description"
+            sx={{ color: "black" }}
+            gutterBottom
+          >
+            {error}
+          </Typography>
+          <Button
+            onClick={handleCloseErrorModal}
+            variant="contained"
+            color="primary"
+          >
+            Fermer
+          </Button>
+        </Box>
+      </Modal>
     </Container>
   );
 }

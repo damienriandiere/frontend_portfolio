@@ -7,7 +7,7 @@ import useAuth from './useAuth';
 
 
 export default function Navbar() {
-  const isLoggedIn = useAuth();
+  const {isLoggedIn, isAdmin} = useAuth();
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -20,7 +20,7 @@ export default function Navbar() {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
-      window.location.reload();
+      window.location.href = '/';
     }, 2000);
   };
 
@@ -58,9 +58,8 @@ export default function Navbar() {
           <MenuItem onClick={() => handleMenuItemClick('/')}>Accueil</MenuItem>
           <MenuItem onClick={() => handleMenuItemClick('/contact')}>A propos</MenuItem>
           <MenuItem onClick={() => handleMenuItemClick('/projects')}>Projects</MenuItem>
-          {isLoggedIn ? (
-          <Button onClick={() => handleMenuItemClick('/dashboard')}>Dashboard</Button>
-          ) : (<></>
+          {isLoggedIn && isAdmin && (
+            <MenuItem onClick={() => handleMenuItemClick('/dashboard')}>Dashboard</MenuItem>
           )}
         </Menu>
         <IconButton

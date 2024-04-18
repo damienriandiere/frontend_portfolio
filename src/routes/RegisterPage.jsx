@@ -1,12 +1,15 @@
 import  { useState } from 'react';
 import axios from 'axios'; 
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
+import Modal from '@mui/material/Modal';
 
 function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
+  const [error, setError] = useState("");
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -26,25 +29,35 @@ function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    var admin;
-    if (role == 'admin'){
-        admin = true;
-    } else {
-        admin = false;
+
+    if (!email || !password) {
+      setError("Veuillez remplir tous les champs");
+      setErrorModalOpen(true); // Ouvre le modal d'erreur
+      return;
     }
 
+    var admin;
+    if (role === "admin") {
+      admin = true;
+    } else {
+      admin = false;
+    }
+  
     try {
-        const response = await axios.post('http://localhost:3000/auth/register', {
-            name,
-            email,
-            password,
-            admin
-        });
-        const token = response.data.token;
-        localStorage.setItem('token', token);
-        window.location.href = '/successful_registered';
+      const response = await axios.post("http://localhost:3000/auth/register", {
+        name,
+        email,
+        password,
+        admin,
+      });
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+      localStorage.setItem("admin", admin);
+      window.location.href = "/successful_registered";
     } catch (error) {
-        console.error('Erreur lors de la connexion:', error);
+      console.error("Erreur lors de l'inscription :", error);
+      setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+      setErrorModalOpen(true); // Ouvre le modal d'erreur
     }
   };
 
@@ -100,6 +113,35 @@ function RegisterPage() {
           S&apos;inscrire
         </Button>
       </Box>
+      <Modal
+  open={errorModalOpen}
+  onClose={() => setErrorModalOpen(false)}
+  aria-labelledby="error-modal-title"
+  aria-describedby="error-modal-description"
+>
+  <Box
+    sx={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: 400,
+      bgcolor: "background.paper",
+      boxShadow: 24,
+      p: 4,
+    }}
+  >
+    <Typography variant="h6" id="error-modal-title" sx={{ color: "black" }} gutterBottom>
+      Erreur
+    </Typography>
+    <Typography variant="body1" id="error-modal-description" sx={{ color: "black" }} gutterBottom>
+      {error}
+    </Typography>
+    <Button onClick={() => setErrorModalOpen(false)} variant="contained" color="primary">
+      Fermer
+    </Button>
+  </Box>
+</Modal>
     </Container>
   );
 }

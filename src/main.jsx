@@ -13,6 +13,7 @@ import Footer from './components/Footer.jsx';
 import RedirectAfterLoginPage from './routes/RedirectAfterLoginPage.jsx';
 import RedirectAfterRegisterPage from './routes/RedirectAfterRegisterPage.jsx';
 import ProjectDetailsPage from './routes/ProjectDetailsPage.jsx';
+import DashboardPage from './routes/DashboardPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
   {
     path: "/projects",
     element: <ProjectPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardPage />,
     errorElement: <ErrorPage />,
   },
   {
