@@ -4,8 +4,8 @@ The objective of this project is to develop a website that can serve as a portfo
 
 - The website will be fullstack.
 - The mandatory programming language to be used is JavaScript.
-- The backend will be developed using Node.js, Express, and optionally MongoDB or PostgreSQL [here](https://github.com/damienriandiere/backend_portfolio).
-- The frontend will be developed using React.js. You can find the repository for the frontend.
+- The backend will be developed using Node.js, Express, and optionally MongoDB or PostgreSQL You can find the repository for the backend.[here](https://github.com/damienriandiere/backend_portfolio).
+- The frontend will be developed using React.js. 
   - The usage of frameworks based on React.js (e.g., Next.js) is prohibited.
   - The usage of website templates is prohibited.
 
