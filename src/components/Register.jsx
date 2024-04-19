@@ -1,13 +1,13 @@
-import  { useState } from 'react';
-import axios from 'axios'; 
-import { TextField, Button, Box, Typography, Container } from '@mui/material';
-import Modal from '@mui/material/Modal';
+import { useState } from "react";
+import axios from "axios";
+import { TextField, Button, Box, Typography, Container } from "@mui/material";
+import Modal from "@mui/material/Modal";
 
 export default function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [role, setRole] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
   const [error, setError] = useState("");
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const admin_code = import.meta.env.VITE_ADMIN_CODE;
@@ -44,7 +44,7 @@ export default function Register() {
     } else {
       admin = false;
     }
-  
+
     try {
       const response = await axios.post(`${url_backend}/api/auth/register`, {
         name,
@@ -62,7 +62,9 @@ export default function Register() {
       window.location.href = "/";
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
-      setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+      setError(
+        "Une erreur s'est produite lors de l'inscription. Veuillez réessayer."
+      );
       setErrorModalOpen(true); // Ouvre le modal d'erreur
     }
   };
@@ -80,8 +82,8 @@ export default function Register() {
           name="name"
           value={name}
           onChange={handleNameChange}
-          InputProps={{ style: { color: 'white' } }}
-          InputLabelProps={{ style: { color: 'white' } }}
+          InputProps={{ style: { color: "white" } }}
+          InputLabelProps={{ style: { color: "white" } }}
         />
         <TextField
           fullWidth
@@ -91,8 +93,8 @@ export default function Register() {
           name="email"
           value={email}
           onChange={handleEmailChange}
-          InputProps={{ style: { color: 'white' } }}
-          InputLabelProps={{ style: { color: 'white' } }}
+          InputProps={{ style: { color: "white" } }}
+          InputLabelProps={{ style: { color: "white" } }}
         />
         <TextField
           fullWidth
@@ -102,8 +104,8 @@ export default function Register() {
           name="password"
           value={password}
           onChange={handlePasswordChange}
-          InputProps={{ style: { color: 'white' } }}
-          InputLabelProps={{ style: { color: 'white' } }}
+          InputProps={{ style: { color: "white" } }}
+          InputLabelProps={{ style: { color: "white" } }}
         />
         <TextField
           fullWidth
@@ -112,42 +114,56 @@ export default function Register() {
           name="code"
           value={role}
           onChange={handleRoleChange}
-          InputProps={{ style: { color: 'white' } }}
-          InputLabelProps={{ style: { color: 'white' } }}
+          InputProps={{ style: { color: "white" } }}
+          InputLabelProps={{ style: { color: "white" } }}
         />
         <Button type="submit" variant="contained" color="primary">
           S&apos;inscrire
         </Button>
       </Box>
       <Modal
-  open={errorModalOpen}
-  onClose={() => setErrorModalOpen(false)}
-  aria-labelledby="error-modal-title"
-  aria-describedby="error-modal-description"
->
-  <Box
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: 400,
-      bgcolor: "background.paper",
-      boxShadow: 24,
-      p: 4,
-    }}
-  >
-    <Typography variant="h6" id="error-modal-title" sx={{ color: "black" }} gutterBottom>
-      Erreur
-    </Typography>
-    <Typography variant="body1" id="error-modal-description" sx={{ color: "black" }} gutterBottom>
-      {error}
-    </Typography>
-    <Button onClick={() => setErrorModalOpen(false)} variant="contained" color="primary">
-      Fermer
-    </Button>
-  </Box>
-</Modal>
+        open={errorModalOpen}
+        onClose={() => setErrorModalOpen(false)}
+        aria-labelledby="error-modal-title"
+        aria-describedby="error-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography
+            variant="h6"
+            id="error-modal-title"
+            sx={{ color: "black" }}
+            gutterBottom
+          >
+            Erreur
+          </Typography>
+          <Typography
+            variant="body1"
+            id="error-modal-description"
+            sx={{ color: "black" }}
+            gutterBottom
+          >
+            {error}
+          </Typography>
+          <Button
+            onClick={() => setErrorModalOpen(false)}
+            variant="contained"
+            color="primary"
+          >
+            Fermer
+          </Button>
+        </Box>
+      </Modal>
     </Container>
   );
 }

@@ -39,14 +39,15 @@ export default function Dashboard() {
 
     const fetchAnalytics = async () => {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`${url_backend}/api/projects/analytics/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      const anal = response.data.analytics;
-      console.log(anal.length);
+      const response = await axios.get(
+        `${url_backend}/api/projects/analytics/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setAnalytics(response.data.analytics);
     };
 
@@ -91,73 +92,81 @@ export default function Dashboard() {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Card   sx={{
-    maxWidth: 345,
-    '&:hover': {
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)', // Ajoute une ombre au survol
-      transform: 'scale(1.05)' // Zoom sur la carte au survol
-    }
-  }}>
+          <Card
+            sx={{
+              maxWidth: 345,
+              "&:hover": {
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", // Ajoute une ombre au survol
+                transform: "scale(1.05)", // Zoom sur la carte au survol
+              },
+            }}
+          >
             <CardContent>
               <Typography variant="h5" component="div">
                 Total Projects
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {analytics.totalProjects}
+                {analytics.totalProjects} projects
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Card   sx={{
-    maxWidth: 345,
-    '&:hover': {
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)', // Ajoute une ombre au survol
-      transform: 'scale(1.05)' // Zoom sur la carte au survol
-    }
-  }}>
+          <Card
+            sx={{
+              maxWidth: 345,
+              "&:hover": {
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", // Ajoute une ombre au survol
+                transform: "scale(1.05)", // Zoom sur la carte au survol
+              },
+            }}
+          >
             <CardContent>
               <Typography variant="h5" component="div">
                 Total Keywords
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {analytics.totalKeywords}
+                {analytics.totalKeywords} keywords
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Card   sx={{
-    maxWidth: 345,
-    '&:hover': {
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)', // Ajoute une ombre au survol
-      transform: 'scale(1.05)' // Zoom sur la carte au survol
-    }
-  }}>
+          <Card
+            sx={{
+              maxWidth: 345,
+              "&:hover": {
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", // Ajoute une ombre au survol
+                transform: "scale(1.05)", // Zoom sur la carte au survol
+              },
+            }}
+          >
             <CardContent>
               <Typography variant="h5" component="div">
                 Mean Introductory Description
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {analytics.meanIntroductoryDescription}
+                {analytics.meanIntroductoryDescription} characters in average
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Card   sx={{
-    maxWidth: 345,
-    '&:hover': {
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)', // Ajoute une ombre au survol
-      transform: 'scale(1.05)' // Zoom sur la carte au survol
-    }
-  }}>
+          <Card
+            sx={{
+              maxWidth: 345,
+              "&:hover": {
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", // Ajoute une ombre au survol
+                transform: "scale(1.05)", // Zoom sur la carte au survol
+              },
+            }}
+          >
             <CardContent>
               <Typography variant="h5" component="div">
                 Mean Complete Description
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {analytics.meanCompleteDescription}
+                {analytics.meanCompleteDescription} characters in average
               </Typography>
             </CardContent>
           </Card>
@@ -166,23 +175,28 @@ export default function Dashboard() {
       <Typography variant="h4" gutterBottom>
         Liste des projets
       </Typography>
-      <IconButton component={Link} to="/new-project" aria-label="add project" style={{ color: 'white' }}>
+      <IconButton
+        component={Link}
+        to="/new-project"
+        aria-label="add project"
+        style={{ color: "white" }}
+      >
         <AddIcon />
         Add a project
       </IconButton>
-      <ul>
+      <Grid container spacing={3}>
         {projects.map((project) => (
-          <div
-            key={project._id}
-            style={{ marginRight: "20px", marginBottom: "20px" }}
-          >
-            <Card   sx={{
-    maxWidth: 345,
-    '&:hover': {
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)', // Ajoute une ombre au survol
-      transform: 'scale(1.05)' // Zoom sur la carte au survol
-    }
-  }}>
+          <Grid key={project._id} item xs={12} style={{ textAlign: "center" }}>
+            <Card
+              sx={{
+                maxWidth: 345,
+                "&:hover": {
+                  boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", // Ajoute une ombre au survol
+                  transform: "scale(1.05)", // Zoom sur la carte au survol
+                },
+                margin: "auto", // Centre la carte horizontalement
+              }}
+            >
               <CardMedia
                 sx={{ height: 140 }}
                 image={project.thumbnailImage}
@@ -234,16 +248,16 @@ export default function Dashboard() {
               <CardActions>
                 <Button
                   component={Link}
-                  to={`/project/${project._id}`}
+                  to={`/projects/${project._id}`}
                   size="small"
                 >
                   En savoir plus
                 </Button>
               </CardActions>
             </Card>
-          </div>
+          </Grid>
         ))}
-      </ul>
+      </Grid>
       <Dialog
         open={deleteDialogOpen}
         onClose={handleCancelDelete}

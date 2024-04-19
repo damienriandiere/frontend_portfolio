@@ -9,8 +9,8 @@ import Projects from "./components/Projects";
 import ProjectDetails from "./components/ProjectDetails";
 import Dashboard from "./components/Dashboard";
 import ProjectForm from "./components/ProjectForm";
-import Error from "./components/Error";
 import PrivateRoutes from "./components/PrivateRoutes";
+import Error from "./components/Error";
 
 export default function App() {
   const url_backend = import.meta.env.VITE_URL_BACKEND;
@@ -20,19 +20,47 @@ export default function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route element={<PrivateRoutes/>} >
-          <Route element={<Dashboard/>} path='/dashboard' exact/>
-          <Route element={<ProjectForm/>} path='/new-project' exact/>
-          <Route element={<ProjectForm/>} path='/edit-project/:projectId' exact/>
+        <Route element={<PrivateRoutes />} errorElement={<Error />}>
+          <Route element={<Dashboard />} path="/dashboard" exact />
+          <Route element={<ProjectForm />} path="/new-project" exact />
+          <Route
+            element={<ProjectForm />}
+            path="/edit-project/:projectId"
+            exact
+          />
         </Route>
-        
-        <Route element={<Home/>} path='/' exact/>
-        <Route element={<Login/>} path='/login' exact/>
-        <Route element={<Register/>} path='/register' exact/>
-        <Route element={<Contact/>} path='/contact' exact/>
-        <Route element={<Projects/>} path='/projects' exact/>
-        <Route element={<ProjectDetails/>} path='/projects/:projectId' exact/>
-        <Route element={<Error/>} path='*' exact/>
+
+        <Route element={<Home />} path="/" exact errorElement={<Error />} />
+        <Route
+          element={<Login />}
+          path="/login"
+          exact
+          errorElement={<Error />}
+        />
+        <Route
+          element={<Register />}
+          path="/register"
+          exact
+          errorElement={<Error />}
+        />
+        <Route
+          element={<Contact />}
+          path="/contact"
+          exact
+          errorElement={<Error />}
+        />
+        <Route
+          element={<Projects />}
+          path="/projects"
+          exact
+          errorElement={<Error />}
+        />
+        <Route
+          element={<ProjectDetails />}
+          path="/projects/:projectId"
+          exact
+          errorElement={<Error />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

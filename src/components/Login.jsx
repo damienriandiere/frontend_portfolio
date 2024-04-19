@@ -112,7 +112,12 @@ export default function Login() {
             p: 4,
           }}
         >
-          <Typography variant="h6" id="error-modal-title" sx={{ color: "black" }} gutterBottom>
+          <Typography
+            variant="h6"
+            id="error-modal-title"
+            sx={{ color: "black" }}
+            gutterBottom
+          >
             Erreur
           </Typography>
           <Typography

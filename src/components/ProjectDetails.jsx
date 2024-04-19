@@ -7,11 +7,11 @@ import Carousel from "react-material-ui-carousel";
 export default function ProjectDetails() {
   const [project, setProject] = useState([]);
   const { projectId } = useParams();
+  const url_backend = localStorage.getItem("url_backend");
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const url_backend = localStorage.getItem("url_backend");
         const response = await axios.get(
           `${url_backend}/api/projects/${projectId}`
         );
@@ -22,15 +22,17 @@ export default function ProjectDetails() {
     };
 
     fetchProjects();
-  }, [projectId]);
+  }, [projectId, url_backend]);
+
+  console.log(project);
 
   const renderCarousel = () => {
     const carouselStyle = {
-      width: "100%", 
+      width: "100%",
     };
     const imageStyle = {
-      width: "100%", 
-      height: "auto", 
+      width: "100%",
+      height: "auto",
     };
 
     if (project.illustrationImages && project.illustrationImages.length > 0) {
@@ -59,7 +61,7 @@ export default function ProjectDetails() {
           marginTop: "50px",
           display: "flex",
           flexDirection: "column",
-          marginBottom: "20px", 
+          marginBottom: "20px",
         }}
       >
         <Typography gutterBottom variant="h3" component="div">
