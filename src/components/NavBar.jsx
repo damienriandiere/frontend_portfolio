@@ -1,26 +1,35 @@
-import { AppBar, Toolbar, Alert, Button, IconButton, Menu, MenuItem } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { FiArrowLeft } from 'react-icons/fi';
-import { useState } from 'react';
-import CheckIcon from '@mui/icons-material/Check';
-import useAuth from './useAuth';
-
+import {
+  AppBar,
+  Toolbar,
+  Alert,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { FiArrowLeft } from "react-icons/fi";
+import { useState } from "react";
+import CheckIcon from "@mui/icons-material/Check";
+import useAuth from "../utils/useAuth";
 
 export default function Navbar() {
-  const {isLoggedIn, isAdmin} = useAuth();
+  const isLoggedIn = useAuth();
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const isAdmin = localStorage.getItem("admin");
 
   const handleMenuOpen = (event) => {
     setMenuAnchor(event.currentTarget);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
+    localStorage.removeItem("admin");
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
-      window.location.href = '/';
+      window.location.href = "/";
     }, 2000);
   };
 
@@ -38,7 +47,7 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ bgcolor: '#242424' }}>
+    <AppBar position="fixed" sx={{ bgcolor: "#242424" }}>
       <Toolbar>
         <IconButton
           size="large"
@@ -55,11 +64,17 @@ export default function Navbar() {
           open={Boolean(menuAnchor)}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={() => handleMenuItemClick('/')}>Accueil</MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick('/contact')}>A propos</MenuItem>
-          <MenuItem onClick={() => handleMenuItemClick('/projects')}>Projects</MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("/")}>Accueil</MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("/contact")}>
+            A propos
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuItemClick("/projects")}>
+            Projects
+          </MenuItem>
           {isLoggedIn && isAdmin && (
-            <MenuItem onClick={() => handleMenuItemClick('/dashboard')}>Dashboard</MenuItem>
+            <MenuItem onClick={() => handleMenuItemClick("/dashboard")}>
+              Dashboard
+            </MenuItem>
           )}
         </Menu>
         <IconButton
@@ -71,19 +86,27 @@ export default function Navbar() {
         >
           <FiArrowLeft />
         </IconButton>
-        <Button href="/" color="inherit" sx={{ flexGrow: 1 }}>Portfolio de Damien Riandiere</Button>
+        <Button href="/" color="inherit" sx={{ flexGrow: 1 }}>
+          Portfolio de Damien Riandiere
+        </Button>
         {isLoggedIn ? (
-          <Button onClick={handleLogout} color="inherit">Se déconnecter</Button>
-          ) : (
-            <>
-              <Button href="/login" color="inherit">Se connecter</Button>
-              <Button href="/register" color="inherit">S&apos;inscrire</Button>
-            </>
-          )}
-          {showAlert && ( 
-            <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-              Vous avez été déconnecté avec succès.
-            </Alert>
+          <Button onClick={handleLogout} color="inherit">
+            Se déconnecter
+          </Button>
+        ) : (
+          <>
+            <Button href="/login" color="inherit">
+              Se connecter
+            </Button>
+            <Button href="/register" color="inherit">
+              S&apos;inscrire
+            </Button>
+          </>
+        )}
+        {showAlert && (
+          <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+            Vous avez été déconnecté avec succès.
+          </Alert>
         )}
       </Toolbar>
     </AppBar>

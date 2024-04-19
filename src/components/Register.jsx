@@ -3,13 +3,15 @@ import axios from 'axios';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
 import Modal from '@mui/material/Modal';
 
-function RegisterPage() {
+export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [error, setError] = useState("");
   const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const admin_code = import.meta.env.VITE_ADMIN_CODE;
+  const url_backend = localStorage.getItem("url_backend");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -37,14 +39,14 @@ function RegisterPage() {
     }
 
     var admin;
-    if (role === "admin") {
+    if (role === admin_code) {
       admin = true;
     } else {
       admin = false;
     }
   
     try {
-      const response = await axios.post("http://localhost:3000/auth/register", {
+      const response = await axios.post(`${url_backend}/api/auth/register`, {
         name,
         email,
         password,
@@ -52,8 +54,12 @@ function RegisterPage() {
       });
       const token = response.data.token;
       localStorage.setItem("token", token);
-      localStorage.setItem("admin", admin);
-      window.location.href = "/successful_registered";
+      if (admin === true) {
+        localStorage.setItem("admin", true);
+      } else {
+        localStorage.setItem("admin", false);
+      }
+      window.location.href = "/";
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
       setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
@@ -145,5 +151,3 @@ function RegisterPage() {
     </Container>
   );
 }
-
-export default RegisterPage;

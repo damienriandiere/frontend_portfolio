@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
 import Modal from '@mui/material/Modal';
 
-function ContactPage() {
+function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     message: ''
@@ -33,7 +33,6 @@ function ContactPage() {
       return;
     }
   
-    // Si tous les champs sont remplis, continuez le traitement du formulaire
     const mailto = import.meta.env.VITE_MAILTO;
     const mailtoLink = `mailto:${mailto}?subject=${encodeURIComponent('Message de ' + name)}&body=${encodeURIComponent(message + '\n\n')}`;
     window.location.href = mailtoLink;
@@ -134,4 +133,4 @@ function ContactPage() {
   );
 }
 
-export default ContactPage;
+export default Contact;

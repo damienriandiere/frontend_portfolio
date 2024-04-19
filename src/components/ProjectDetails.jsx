@@ -4,19 +4,20 @@ import axios from "axios";
 import { Chip, Container, Typography } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 
-export default function ProjectDetailsPage() {
+export default function ProjectDetails() {
   const [project, setProject] = useState([]);
   const { projectId } = useParams();
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
+        const url_backend = localStorage.getItem("url_backend");
         const response = await axios.get(
-          `http://localhost:3000/projects/${projectId}`
+          `${url_backend}/api/projects/${projectId}`
         );
         setProject(response.data);
       } catch (error) {
-        console.error("Erreur lors de la récupération des projets :", error);
+        console.error("Erreur lors de la récupération du projet :", error);
       }
     };
 

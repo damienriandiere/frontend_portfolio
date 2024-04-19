@@ -11,20 +11,21 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-export default function MediaCard() {
+export default function Projects() {
   const [projects, setProjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+ 
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/projects/");
+        const url_backend = localStorage.getItem("url_backend");
+        const response = await axios.get(`${url_backend}/api/projects/`);
         setProjects(response.data);
       } catch (error) {
         console.error("Erreur lors de la récupération des projets :", error);
       }
     };
-
     fetchProjects();
   }, []);
 

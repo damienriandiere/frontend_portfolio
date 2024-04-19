@@ -9,7 +9,7 @@ import {
   Modal,
 } from "@mui/material";
 
-function LoginPage() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -34,16 +34,20 @@ function LoginPage() {
 
     try {
       const url_backend = import.meta.env.VITE_URL_BACKEND;
-      const url = url_backend + "/auth/login";
+      const url = url_backend + "/api/auth/login";
       const response = await axios.post(url, {
         email,
         password,
       });
       const admin = response.data.tokens.userProfile.admin;
       const token = response.data.tokens.accessToken;
+      if (admin === true) {
+        localStorage.setItem("admin", true);
+      } else {
+        localStorage.setItem("admin", false);
+      }
       localStorage.setItem("token", token);
-      localStorage.setItem("admin", admin);
-      window.location.href = "/successful_logged";
+      window.location.href = "/";
     } catch (e) {
       console.error("Erreur lors de la connexion:", e);
       console.log(error);
@@ -131,5 +135,3 @@ function LoginPage() {
     </Container>
   );
 }
-
-export default LoginPage;

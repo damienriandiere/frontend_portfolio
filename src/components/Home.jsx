@@ -1,6 +1,12 @@
-import { Container, Grid, Paper, Typography } from '@mui/material';
+import { Container, Grid, Paper, Typography, Button } from '@mui/material';
 
-function HomePage() {
+export default function Home() {
+  const url_backend = import.meta.env.VITE_URL_BACKEND;
+
+  const handleSwaggerPage = () => {
+    window.location.href = `${url_backend}/api/api-docs`;
+  }
+
   return (
     <Container maxWidth="lg" style={{ marginTop: '70px' }}>
       <Grid container spacing={3}>
@@ -12,13 +18,17 @@ function HomePage() {
         <Grid item xs={12} sm={6}>
           <Paper style={{ padding: '20px' }}>
             <Typography variant="h5" gutterBottom>
-              À propos de moi
+              Swagger for API
             </Typography>
             <Typography variant="body1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere magna sit amet ex volutpat
-              dignissim. Sed ac ex ac orci ultricies dignissim. Pellentesque habitant morbi tristique senectus et
-              netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et
-              ultrices posuere cubilia curae; Donec eget enim non arcu laoreet finibus.
+              Si vous souhaitez voir la documentation de mon API, vous pouvez la consulter sur Swagger :
+              <Button
+            onClick={handleSwaggerPage}
+            variant="contained"
+
+          >
+            SWAGGER
+          </Button>
             </Typography>
           </Paper>
         </Grid>
@@ -36,5 +46,3 @@ function HomePage() {
     </Container>
   );
 }
-
-export default HomePage;
